@@ -1,0 +1,1094 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yash Shinde | Portfolio</title>
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        
+        :root {
+            --primary: #3498db; /* Sky blue */
+            --primary-dark: #2980b9; /* Darker sky blue */
+            --secondary: #2c3e50; /* Navy blue */
+            --accent: #1abc9c; /* Teal accent */
+            --dark: #0a192f; /* Dark navy */
+            --darker: #020c1b; /* Very dark navy */
+            --light: #e6f1ff; /* Light blue-white */
+            --gray: #172a45; /* Dark blue-gray */
+            --light-gray: #ccd6f6; /* Light blue-gray */
+        }
+        
+        body {
+            background-color: var(--dark);
+            color: var(--light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: rgba(2, 12, 27, 0.95);
+            color: white;
+            padding: 25px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--gray);
+            backdrop-filter: blur(8px);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 35px;
+            position: relative;
+        }
+        
+        .nav-links a {
+            color: var(--light-gray);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            font-size: 18px;
+            padding: 5px 0;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s;
+            border-radius: 3px;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        /* Section Styles */
+        section {
+            padding: 120px 0;
+            min-height: 100vh;
+            display: none;
+            position: relative;
+        }
+        
+        section.active {
+            display: block;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 70px;
+            font-size: 42px;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--light-gray);
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 60%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            bottom: -10px;
+            left: 20%;
+            border-radius: 2px;
+        }
+        
+        /* Home Section */
+        #home {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: radial-gradient(circle at 30% 50%, rgba(52, 152, 219, 0.2) 0%, rgba(10, 25, 47, 0) 50%);
+        }
+        
+        .home-content {
+            max-width: 800px;
+            padding: 40px;
+            position: relative;
+        }
+        
+        .home-content h1 {
+            font-size: 52px;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            color: var(--light-gray);
+        }
+        
+        .home-content h1 span {
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .home-content h2 {
+            font-size: 28px;
+            margin-bottom: 30px;
+            font-weight: 300;
+            color: rgba(230, 241, 255, 0.8);
+        }
+        
+        .home-content p {
+            font-size: 18px;
+            margin-bottom: 40px;
+            color: rgba(230, 241, 255, 0.7);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .profile-container {
+            position: relative;
+            width: 220px;
+            height: 220px;
+            margin: 0 auto 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            padding: 6px;
+            box-shadow: 0 10px 30px rgba(52, 152, 219, 0.3);
+        }
+        
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--darker);
+        }
+        
+        .upload-btn {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            background: var(--darker);
+            color: var(--primary);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            transition: all 0.3s;
+            border: 2px solid var(--primary);
+        }
+        
+        .upload-btn:hover {
+            transform: scale(1.1);
+            background: var(--primary);
+            color: var(--darker);
+        }
+        
+        #file-upload {
+            display: none;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 40px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            color: var(--darker);
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(52, 152, 219, 0.5);
+        }
+        
+        .btn-outline {
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            background: transparent;
+        }
+        
+        .btn-outline:hover {
+            background: rgba(52, 152, 219, 0.1);
+            transform: translateY(-3px);
+        }
+        
+        /* Education Section */
+        #education {
+            background: radial-gradient(circle at 70% 50%, rgba(28, 188, 156, 0.15) 0%, rgba(10, 25, 47, 0) 50%);
+        }
+        
+        .education-container {
+            display: flex;
+            flex-direction: column;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .education-item {
+            display: flex;
+            margin-bottom: 40px;
+            position: relative;
+            padding-left: 120px;
+        }
+        
+        .education-year {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 90px;
+            height: 90px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: var(--darker);
+            box-shadow: 0 5px 20px rgba(52, 152, 219, 0.3);
+        }
+        
+        .education-content {
+            background: var(--gray);
+            padding: 30px;
+            border-radius: 15px;
+            width: 100%;
+            border-left: 4px solid var(--primary);
+            transition: transform 0.3s;
+        }
+        
+        .education-content:hover {
+            transform: translateY(-5px);
+        }
+        
+        .education-content h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+        
+        .education-content h4 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: var(--light-gray);
+            font-weight: 500;
+        }
+        
+        .education-content p {
+            color: rgba(230, 241, 255, 0.7);
+            margin-bottom: 15px;
+        }
+        
+        .education-details {
+            display: flex;
+            gap: 20px;
+            margin-top: 15px;
+        }
+        
+        .education-detail {
+            display: flex;
+            align-items: center;
+            color: var(--accent);
+        }
+        
+        .education-detail i {
+            margin-right: 8px;
+        }
+        
+        /* Projects Section */
+        #projects {
+            background: radial-gradient(circle at 30% 70%, rgba(52, 152, 219, 0.15) 0%, rgba(10, 25, 47, 0) 50%);
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        
+        .project-card {
+            background: var(--gray);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s;
+            border: 1px solid rgba(52, 152, 219, 0.1);
+            position: relative;
+            padding: 30px;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(52, 152, 219, 0.2);
+            border-color: rgba(52, 152, 219, 0.3);
+        }
+        
+        .project-content h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: var(--light-gray);
+        }
+        
+        .project-content p {
+            color: rgba(230, 241, 255, 0.7);
+            margin-bottom: 20px;
+        }
+        
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .tech-tag {
+            background: rgba(52, 152, 219, 0.2);
+            color: var(--primary);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .project-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            color: var(--light-gray);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            padding: 8px 16px;
+            border-radius: 5px;
+        }
+        
+        .project-link:hover {
+            background: rgba(52, 152, 219, 0.2);
+            color: var(--primary);
+        }
+        
+        .project-link i {
+            margin-right: 8px;
+        }
+        
+        /* Achievements Section */
+        #achievements {
+            background: radial-gradient(circle at 70% 30%, rgba(28, 188, 156, 0.15) 0%, rgba(10, 25, 47, 0) 50%);
+        }
+        
+        .achievements-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .achievement-card {
+            background: var(--gray);
+            border-radius: 15px;
+            padding: 30px;
+            transition: all 0.3s;
+            border-left: 4px solid var(--accent);
+        }
+        
+        .achievement-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(28, 188, 156, 0.1);
+        }
+        
+        .achievement-icon {
+            font-size: 40px;
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+        
+        .achievement-card h3 {
+            color: var(--light-gray);
+            margin-bottom: 15px;
+            font-size: 22px;
+        }
+        
+        .achievement-card p {
+            color: rgba(230, 241, 255, 0.7);
+            margin-bottom: 15px;
+        }
+        
+        .achievement-date {
+            font-size: 14px;
+            color: var(--accent);
+            font-weight: 500;
+        }
+        
+        /* Contact Section */
+        #contact {
+            background: radial-gradient(circle at 30% 50%, rgba(52, 152, 219, 0.15) 0%, rgba(10, 25, 47, 0) 50%);
+        }
+        
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .contact-info h3 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: var(--light-gray);
+        }
+        
+        .contact-info p {
+            color: rgba(230, 241, 255, 0.7);
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+        
+        .social-links {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .social-link {
+            display: flex;
+            align-items: center;
+            color: var(--light-gray);
+            text-decoration: none;
+            transition: all 0.3s;
+            padding: 12px 20px;
+            border-radius: 8px;
+            background: rgba(23, 42, 69, 0.7);
+            border: 1px solid rgba(52, 152, 219, 0.1);
+        }
+        
+        .social-link:hover {
+            background: rgba(52, 152, 219, 0.2);
+            transform: translateX(5px);
+            border-color: rgba(52, 152, 219, 0.3);
+        }
+        
+        .social-link i {
+            font-size: 24px;
+            margin-right: 15px;
+            width: 30px;
+            color: var(--primary);
+        }
+        
+        .contact-form {
+            background: var(--gray);
+            padding: 40px;
+            border-radius: 15px;
+            border: 1px solid rgba(52, 152, 219, 0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 500;
+            color: var(--light-gray);
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid rgba(52, 152, 219, 0.3);
+            border-radius: 8px;
+            font-size: 16px;
+            background: rgba(2, 12, 27, 0.5);
+            color: var(--light);
+            transition: all 0.3s;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+        }
+        
+        .form-group textarea {
+            height: 150px;
+            resize: vertical;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--darker);
+            color: var(--light);
+            text-align: center;
+            padding: 30px 0;
+            border-top: 1px solid var(--gray);
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .footer-logo {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 20px;
+        }
+        
+        .footer-link {
+            color: rgba(230, 241, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-link:hover {
+            color: var(--primary);
+        }
+        
+        .copyright {
+            color: rgba(230, 241, 255, 0.5);
+            font-size: 14px;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .contact-container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .education-item {
+                padding-left: 0;
+                flex-direction: column;
+            }
+            
+            .education-year {
+                position: relative;
+                margin-bottom: 20px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .home-content h1 {
+                font-size: 42px;
+            }
+            
+            .home-content h2 {
+                font-size: 24px;
+            }
+            
+            .section-title {
+                font-size: 36px;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .home-content {
+                padding: 20px;
+            }
+            
+            .home-content h1 {
+                font-size: 36px;
+            }
+            
+            .section-title {
+                font-size: 32px;
+            }
+            
+            .education-content {
+                padding: 20px;
+            }
+            
+            .contact-form {
+                padding: 25px;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">Yash Shinde</div>
+                <ul class="nav-links">
+                    <li><a href="#" class="nav-link" data-section="home">Home</a></li>
+                    <li><a href="#" class="nav-link" data-section="education">Education</a></li>
+                    <li><a href="#" class="nav-link" data-section="projects">Projects</a></li>
+                    <li><a href="#" class="nav-link" data-section="achievements">Achievements</a></li>
+                    <li><a href="#" class="nav-link" data-section="contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Home Section -->
+        <section id="home" class="active">
+            <div class="container">
+                <div class="home-content">
+                    <div class="profile-container">
+                        <img src="profile1.jpg" alt="Yash Shinde" class="profile-img" id="profile-pic">
+                        <label for="file-upload" class="upload-btn">
+                            <i class="fas fa-camera"></i>
+                        </label>
+                        <input id="file-upload" type="file" accept="image/*">
+                    </div>
+                    <h1>Hi, I'm <span>Yash Shinde</span></h1>
+                    <h2>Building Digital Experiences That Matter</h2>
+                    <p>Electronics Engineering Undergrad | Aspiring Technologist | Exploring Android Development and Innovative Solutions | Frontend Web Development | SPPU'28 | IIT MADRAS'29</p>
+                    <div class="cta-buttons">
+                        <a href="#projects" class="btn btn-primary" data-section="projects">View My Work</a>
+                        <a href="#contact" class="btn btn-outline" data-section="contact">Get In Touch</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education Section -->
+        <section id="education">
+            <div class="container">
+                <h2 class="section-title">My Education</h2>
+                <div class="education-container">
+                    <div class="education-item">
+                        <div class="education-year">2022</div>
+                        <div class="education-content">
+                            <h3>Class 10 Secondary School</h3>
+                            <h4>St. Francis High School, Nashik</h4>
+                            <p>Passed 10th Class With 91.2%</p>
+                            <div class="education-details">
+                                <div class="education-detail">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    <span>Class 10th: 92.1%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="education-item">
+                        <div class="education-year">2022-24</div>
+                        <div class="education-content">
+                            <h3>Higher Secondary Education</h3>
+                            <h4>Matoshri JR. College Nashik | Spectrum Coaches Nashik</h4>
+                            <p>I have completed my 11th-12th College along with Jee preparation At spectrum coaches nashik, And I Qualified Jee Mains in 2024, But unfortunately can't make it in JEE advanced 2024, Then I Got Admission in MIT Pune in B.Tech ENTC along with it I also took admission in IIT MADRAS BS Degree in data science in 2025</p>
+                            <div class="education-details">
+                                <div class="education-detail">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    <span>Class 12: 81.83% | JEE Mains 2024 Qualified</span>
+                                </div>
+                                <div class="education-detail">
+                                    <i class="fas fa-award"></i>
+                                    <span>SPPU'28 | IIT MADRAS'29</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="education-item">
+                        <div class="education-year">2024-28</div>
+                        <div class="education-content">
+                            <h3>Undergraduation</h3>
+                            <h4>IIT MADRAS X SPPU(MITAOE)</h4>
+                            <p>Currently I Am Pursuing B.Tech In ENTC AT SPPU(MITAOE) As well BS Degree in Data Science AT IIT MADRAS</p>
+                            <div class="education-details">
+                                <!-- Additional details can be added here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects">
+            <div class="container">
+                <h2 class="section-title">Featured Projects</h2>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div class="project-content">
+                            <h3>Garbage Treatment Power Plant</h3>
+                            <p>The New Garbage Treatment Plant presents an innovative, eco-friendly solution for waste management. By combining steam power, solar energy, and bio-fertilizer production, the project effectively tackles electricity shortages and environmental concerns. Its emphasis on recycling, zero waste, and sustainable practices highlights its potential to improve urban waste management systems.</p>
+                            <p>Electricity Generation: Dry and wet garbage heat a boiler to create steam, which powers a turbine. Solid garbage is heated to produce light, which reflects on solar panels to generate additional electricity.</p>
+                            <p>Fertilizer Production: A mixture of cow dung, wet garbage, and gases from factories is processed to create nutrient-rich fertilizer.</p>
+                            <p>Recycling: Scrap materials are melted and reshaped for reuse in factories.</p>
+                            <p>The project emphasizes zero waste, sustainable energy production, and eco-friendly practices, reducing pollution and maximizing resource recovery.</p>
+                            <div class="project-tech">
+                                <!-- Add relevant tech tags here -->
+                            </div>
+                            <div class="project-links">
+                                <a href="#" class="project-link" target="_blank"><i class="fas fa-external-link-alt"></i> Working Video</a>
+                                <a href="#" class="project-link" target="_blank"><i class="fab fa-github"></i> Images</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card">
+                        <div class="project-content">
+                            <h3>Virtual Doubt Solving & Peer Mentorship Platform</h3>
+                            <p>Developed a web-based platform that facilitates real-time doubt solving and peer-to-peer mentorship among students. The platform allows users to post academic queries, engage in collaborative discussions, and connect with peers or mentors for personalized support. Designed with a responsive and intuitive UI using HTML, CSS, and JavaScript, ensuring accessibility and seamless user experience across devices. This project aims to promote a community-driven learning environment and enhance collaborative problem-solving in educational settings.</p>
+                            <div class="project-tech">
+                                <span class="tech-tag">Vue.js</span>
+                                <span class="tech-tag">Express</span>
+                                <span class="tech-tag">PostgreSQL</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="#" class="project-link" target="_blank"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                                <a href="#" class="project-link" target="_blank"><i class="fab fa-github"></i> Code</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card">
+                        <div class="project-content">
+                            <h3>Self Navigating Vehicle</h3>
+                            <p>This project involves designing an autonomous vehicle using an Arduino microcontroller that can navigate its environment efficiently by avoiding obstacles and following a predefined path. It is equipped with ultrasonic sensors for real-time obstacle detection and IR sensors for line following. The L298N motor driver controls the vehicle's movement based on sensor inputs. The system operates in dual modes—line-following mode for guided movement and obstacle avoidance mode for free navigation. By integrating smart sensors and decision-making algorithms, this project enables efficient, hands-free navigation, making it ideal for applications like automated transportation and robotics.</p>
+                            <div class="project-tech">
+                                <!-- Add relevant tech tags here -->
+                            </div>
+                            <div class="project-links">
+                                <a href="#" class="project-link" target="_blank"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                                <a href="#" class="project-link" target="_blank"><i class="fab fa-github"></i> Code</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card">
+                        <div class="project-content">
+                            <h3>Automatic Plant Irrigation System</h3>
+                            <p>This project aims to design an automatic irrigation system using the IC 555 timer as a moisture sensor and control unit. The system monitors soil moisture levels and activates a water pump when the soil is dry, ensuring optimal watering for plants. The IC 555 is configured as a comparator, detecting changes in resistance from soil moisture sensors. When moisture drops below a set threshold, the 555 timer triggers a relay to turn on the water pump. Once the soil is adequately moist, the pump automatically turns off. This system helps conserve water, reduce manual effort, and maintain plant health efficiently.</p>
+                            <div class="project-tech">
+                                <span class="tech-tag">D3.js</span>
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">Flask</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="#" class="project-link" target="_blank"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                                <a href="#" class="project-link" target="_blank"><i class="fab fa-github"></i> Code</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Achievements Section -->
+        <section id="achievements">
+            <div class="container">
+                <h2 class="section-title">My Achievements</h2>
+                <div class="achievements-container">
+                    <div class="achievement-card">
+                        <div class="achievement-icon">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <h3>Inspire Award at Inter-School Level</h3>
+                        <p>In My School I Developed a Project Of Garbage treatment power plant which generates electricity from garbage for this project I Won ₹10K Scholarship And Was to be presented at inter school competition in Nashik.</p>
+                        <div class="achievement-date">January 2020</div>
+                    </div>
+                    
+                    <div class="achievement-card">
+                        <div class="achievement-icon">
+                            <i class="fas fa-medal"></i>
+                        </div>
+                        <h3>Datathon 2025</h3>
+                        <p>It Was My first Hackathon at MITAOE College where I developed a virtual doubt solving & peer mentorship platform With my teammates And we Qualified round2 and got Silver Certificate but unfortunately we couldn't make it to round 3.</p>
+                        <div class="achievement-date">April 2025</div>
+                    </div>
+                    
+                    <div class="achievement-card">
+                        <div class="achievement-icon">
+                            <i class="fas fa-certificate"></i>
+                        </div>
+                        <h3>Cisco Python Certified</h3>
+                        <p>I Have completed a Cisco python course and I got certified from Cisco.</p>
+                        <div class="achievement-date">April 2025</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact">
+            <div class="container">
+                <h2 class="section-title">Get In Touch</h2>
+                <div class="contact-container">
+                    <div class="contact-info">
+                        <h3>Let's Work Together</h3>
+                        <p>I'm currently available for freelance work and open to new opportunities. Whether you have a project in mind or just want to chat about technology, feel free to reach out!</p>
+                        
+                        <div class="social-links">
+                            <a href="mailto:yash@gmail.com" class="social-link">
+                                <i class="fas fa-envelope"></i>
+                                yash@gmail.com
+                            </a>
+                            <a href="https://twitter.com/yash" target="_blank" class="social-link">
+                                <i class="fab fa-twitter"></i>
+                                @yash
+                            </a>
+                            <a href="https://github.com/yash" target="_blank" class="social-link">
+                                <i class="fab fa-github"></i>
+                                github.com/yash
+                            </a>
+                            <a href="https://linkedin.com/in/yash-shinde-922481308" target="_blank" class="social-link">
+                                <i class="fab fa-linkedin"></i>
+                                linkedin.com/in/yash-shinde-922481308
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-form">
+                        <form id="contactForm">
+                            <div class="form-group">
+                                <label for="name">Your Name</label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Your Message</label>
+                                <textarea id="message" name="message" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">Yash Shinde</div>
+                <div class="footer-links">
+                    <a href="#" class="footer-link" data-section="home">Home</a>
+                    <a href="#" class="footer-link" data-section="education">Education</a>
+                    <a href="#" class="footer-link" data-section="projects">Projects</a>
+                    <a href="#" class="footer-link" data-section="achievements">Achievements</a>
+                    <a href="#" class="footer-link" data-section="contact">Contact</a>
+                </div>
+                <div class="copyright">
+                    &copy; 2025 Yash Shinde. All rights reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navigation functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.nav-link, .footer-link');
+            const sections = document.querySelectorAll('section');
+            
+            // Set home as active by default
+            document.getElementById('home').classList.add('active');
+            
+            // Function to handle navigation
+            function handleNavigation(e) {
+                if (e) e.preventDefault();
+                
+                // Remove active class from all sections
+                sections.forEach(s => s.classList.remove('active'));
+                
+                // Add active class to corresponding section
+                const sectionId = this.getAttribute('data-section');
+                document.getElementById(sectionId).classList.add('active');
+                
+                // Update URL
+                history.pushState(null, null, `#${sectionId}`);
+                
+                // Smooth scroll to section
+                document.getElementById(sectionId).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
+            
+            // Add click event to all navigation
+            navLinks.forEach(link => {
+                link.addEventListener('click', handleNavigation);
+            });
+            
+            // Handle back/forward navigation
+            window.addEventListener('popstate', function() {
+                const hash = window.location.hash.substring(1);
+                if (hash) {
+                    const targetLink = document.querySelector(`.nav-link[data-section="${hash}"]`);
+                    if (targetLink) {
+                        handleNavigation.call(targetLink);
+                    }
+                }
+            });
+            
+            // Check for hash on initial load
+            if (window.location.hash) {
+                const hash = window.location.hash.substring(1);
+                const targetLink = document.querySelector(`.nav-link[data-section="${hash}"]`);
+                if (targetLink) {
+                    handleNavigation.call(targetLink);
+                }
+            }
+            
+            // Contact form submission
+            const contactForm = document.getElementById('contactForm');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Get form values
+                    const name = document.getElementById('name').value;
+                    const email = document.getElementById('email').value;
+                    const message = document.getElementById('message').value;
+                    
+                    // Here you would typically send the data to a server
+                    console.log('Form submitted:', { name, email, message });
+                    
+                    // Show success message
+                    alert('Thank you for your message! I will get back to you soon.');
+                    
+                    // Reset form
+                    contactForm.reset();
+                });
+            }
+            
+            // Profile picture upload functionality
+            const fileUpload = document.getElementById('file-upload');
+            const profilePic = document.getElementById('profile-pic');
+            
+            fileUpload.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(event) {
+                        profilePic.src = event.target.result;
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+            
+            // Animate elements when they come into view
+            const observerOptions = {
+                threshold: 0.1
+            };
+            
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate');
+                    }
+                });
+            }, observerOptions);
+            
+            // Observe all sections and cards
+            document.querySelectorAll('section, .project-card, .achievement-card, .education-content').forEach(el => {
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>
